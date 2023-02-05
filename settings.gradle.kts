@@ -1,3 +1,12 @@
+/*
+ * Copyright 2023 Marlonlom
+ *
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ *
+*/
+
 pluginManagement {
   repositories {
     google()
@@ -5,6 +14,7 @@ pluginManagement {
     gradlePluginPortal()
   }
 }
+
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
@@ -16,5 +26,5 @@ dependencyResolutionManagement {
 rootProject.name = "Talculator"
 
 /* Including application modules */
-include ":mobile_app"
-project(":mobile_app").projectDir = new File(rootDir, "apps/mobile_app")
+include(":mobile_app")
+project(":mobile_app").projectDir = File(rootDir, "apps/mobile_app")
