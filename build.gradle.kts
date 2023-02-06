@@ -8,14 +8,19 @@
  */
 
 plugins {
-  id("com.android.application") version "7.4.0" apply false
-  id("com.android.library") version "7.4.0" apply false
-  id("org.jetbrains.kotlin.android") version "1.8.0" apply false
-  id("com.diffplug.spotless") version "6.14.0"
+  alias(libs.plugins.android.application) apply false
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.spotless) apply false
 }
 
 /* Applying additional configs */
 subprojects {
+  repositories {
+    google()
+    mavenCentral()
+  }
+
   val ktlintEditorConfigOverridesMap = mapOf(
     "android" to true,
     "indent_size" to 2,
