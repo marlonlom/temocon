@@ -25,4 +25,3 @@ TBD
 ## License
 
 This application is released under MIT (see [LICENSE](LICENSE)).
-Some of the used libraries are released under different licenses.
