@@ -1,3 +1,11 @@
+/*
+ * Copyright 2023 Marlonlom
+ *
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ *
+*/
 package dev.marlonlom.apps.talculator.ui.theme
 
 import android.app.Activity
@@ -18,13 +26,13 @@ import androidx.core.view.ViewCompat
 private val DarkColorScheme = darkColorScheme(
   primary = Purple80,
   secondary = PurpleGrey80,
-  tertiary = Pink80
+  tertiary = Pink80,
 )
 
 private val LightColorScheme = lightColorScheme(
   primary = Purple40,
   secondary = PurpleGrey40,
-  tertiary = Pink40
+  tertiary = Pink40,
 
   /* Other default colors to override
   background = Color(0xFFFFFBFE),
@@ -42,7 +50,7 @@ fun TalculatorTheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
   // Dynamic color is available on Android 12+
   dynamicColor: Boolean = true,
-  content: @Composable () -> Unit
+  content: @Composable () -> Unit,
 ) {
   val colorScheme = when {
     dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -63,6 +71,6 @@ fun TalculatorTheme(
   MaterialTheme(
     colorScheme = colorScheme,
     typography = Typography,
-    content = content
+    content = content,
   )
 }

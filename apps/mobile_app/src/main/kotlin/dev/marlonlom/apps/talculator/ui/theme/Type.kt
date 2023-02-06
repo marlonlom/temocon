@@ -1,3 +1,11 @@
+/*
+ * Copyright 2023 Marlonlom
+ *
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ *
+*/
 package dev.marlonlom.apps.talculator.ui.theme
 
 import androidx.compose.material3.Typography
@@ -13,8 +21,8 @@ val Typography = Typography(
     fontWeight = FontWeight.Normal,
     fontSize = 16.sp,
     lineHeight = 24.sp,
-    letterSpacing = 0.5.sp
-  )
+    letterSpacing = 0.5.sp,
+  ),
   /* Other default text styles to override
   titleLarge = TextStyle(
       fontFamily = FontFamily.Default,
