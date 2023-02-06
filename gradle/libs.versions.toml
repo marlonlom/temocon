@@ -1,0 +1,4 @@
+[versions]
+
+compose = "1.3.3"
+compose-compiler = "1.4.0"
