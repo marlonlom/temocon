@@ -5,7 +5,7 @@
  * license that can be found in the LICENSE file or at
  * https://opensource.org/licenses/MIT.
  *
-*/
+ */
 
 pluginManagement {
   repositories {
@@ -15,6 +15,8 @@ pluginManagement {
   }
 }
 
+/*TODO: remove this if warning does not happen again in future updates */
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
@@ -26,5 +28,4 @@ dependencyResolutionManagement {
 rootProject.name = "Talculator"
 
 /* Including application modules */
-include(":mobile_app")
-project(":mobile_app").projectDir = File(rootDir, "apps/mobile_app")
+include(":apps:mobile_app")
