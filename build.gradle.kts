@@ -5,16 +5,46 @@
  * license that can be found in the LICENSE file or at
  * https://opensource.org/licenses/MIT.
  *
-*/
+ */
 
-
-/* Top-level build file where you can add configuration options common to all sub-projects/modules. */
 plugins {
   id("com.android.application") version "7.4.0" apply false
   id("com.android.library") version "7.4.0" apply false
-  id("org.jetbrains.kotlin.android") version "1.7.0" apply false
+  id("org.jetbrains.kotlin.android") version "1.8.0" apply false
+  id("com.diffplug.spotless") version "6.14.0"
 }
 
-tasks.register("clean", Delete::class) {
-  delete(rootProject.buildDir)
+/* Applying additional configs */
+subprojects {
+  val ktlintEditorConfigOverridesMap = mapOf(
+    "android" to true,
+    "indent_size" to 2,
+    "ij_continuation_indent_size" to 2,
+    "trim_trailing_whitespace" to true,
+    "insert_final_newline" to true,
+    "end_of_line" to "lf",
+    "max_line_length" to 120,
+  )
+
+  apply(plugin = "com.diffplug.spotless")
+
+  configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    kotlin {
+      target("**/src/*.kt")
+      targetExclude("$buildDir/**/*.kt")
+      ktlint().editorConfigOverride(ktlintEditorConfigOverridesMap)
+      trimTrailingWhitespace()
+      indentWithSpaces(2)
+      endWithNewline()
+      licenseHeaderFile(File("${project.rootDir}/spotless/copyright.kt"))
+    }
+    kotlinGradle {
+      target("**/*.gradle.kts", "*.gradle.kts")
+      targetExclude("$buildDir/**/*.kts")
+      ktlint().editorConfigOverride(ktlintEditorConfigOverridesMap)
+      trimTrailingWhitespace()
+      indentWithSpaces(2)
+      endWithNewline()
+    }
+  }
 }
