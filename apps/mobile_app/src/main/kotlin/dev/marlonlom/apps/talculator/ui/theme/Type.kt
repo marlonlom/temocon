@@ -10,9 +10,19 @@ package dev.marlonlom.apps.talculator.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import dev.marlonlom.apps.talculator.R
+
+val barlowCondensedFontFamily = FontFamily(
+  Font(R.font.barlow_condensed_regular),
+  Font(R.font.barlow_condensed_italic, style = FontStyle.Italic),
+  Font(R.font.barlow_condensed_medium, weight = FontWeight.Medium),
+  Font(R.font.barlow_condensed_medium_italic, weight = FontWeight.Medium, style = FontStyle.Italic)
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(
