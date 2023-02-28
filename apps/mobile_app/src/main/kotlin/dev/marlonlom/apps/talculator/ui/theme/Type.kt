@@ -25,13 +25,13 @@ val barlowCondensedFontFamily = FontFamily(
 )
 
 // Set of Material typography styles to start with
-val Typography = Typography(
+val typography = Typography(
   bodyLarge = TextStyle(
-    fontFamily = FontFamily.Default,
+    fontFamily = barlowCondensedFontFamily,
     fontWeight = FontWeight.Normal,
     fontSize = 16.sp,
-    lineHeight = 24.sp,
-    letterSpacing = 0.5.sp,
+    lineHeight = 20.sp,
+    letterSpacing = 0.5.sp
   ),
   /* Other default text styles to override
   titleLarge = TextStyle(
