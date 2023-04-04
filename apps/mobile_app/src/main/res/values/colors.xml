@@ -7,4 +7,42 @@
   <color name="teal_700">#FF018786</color>
   <color name="black">#FF000000</color>
   <color name="white">#FFFFFFFF</color>
+
+  <color name="brand_armadillo">#FF43483F</color>
+  <color name="brand_bilbao">#FF356A21</color>
+  <color name="brand_bilbao_2">#FF3D691B</color>
+  <color name="brand_black">#FF000000</color>
+  <color name="brand_british_racing_green">#FF0C3900</color>
+  <color name="brand_british_racing_green_2">#FF133800</color>
+  <color name="brand_british_racing_green_3">#FF183800</color>
+  <color name="brand_crusoe">#FF1D5209</color>
+  <color name="brand_dark_green">#FF052100</color>
+  <color name="brand_dark_green_2">#FF082100</color>
+  <color name="brand_dark_green_3">#FF0B2000</color>
+  <color name="brand_delta">#FF8D9387</color>
+  <color name="brand_feijoa">#FF9AD680</color>
+  <color name="brand_feijoa_2">#FFA1D579</color>
+  <color name="brand_feta">#FFDFE4D7</color>
+  <color name="brand_fire_brick">#FFBA1A1A</color>
+  <color name="brand_green">#FF265101</color>
+  <color name="brand_gunsmoke">#FF73796E</color>
+  <color name="brand_harp">#FFC3C8BB</color>
+  <color name="brand_ivory">#FFF7FFEC</color>
+  <color name="brand_maroon">#FF2B1700</color>
+  <color name="brand_maroon_2">#FF410002</color>
+  <color name="brand_maroon_3">#FF482900</color>
+  <color name="brand_maroon_4">#FF673D00</color>
+  <color name="brand_maroon_5">#FF690005</color>
+  <color name="brand_melon">#FFFFB4AB</color>
+  <color name="brand_mint_green">#FFCEFFAE</color>
+  <color name="brand_misty_rose">#FFFFDAD6</color>
+  <color name="brand_olive">#FF885200</color>
+  <color name="brand_peach_puff">#FFFFDCBB</color>
+  <color name="brand_rajah">#FFFFB869</color>
+  <color name="brand_reef">#FFB5F399</color>
+  <color name="brand_reef_2">#FFB9F396</color>
+  <color name="brand_reef_3">#FFBCF293</color>
+  <color name="brand_sangria">#FF93000A</color>
+  <color name="brand_white">#FFFFFFFF</color>
+
 </resources>
