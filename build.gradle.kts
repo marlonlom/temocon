@@ -18,6 +18,8 @@ plugins {
   alias(libs.plugins.detekt) apply false
 }
 
+apply(plugin = "io.gitlab.arturbosch.detekt")
+
 /* Applying additional configs */
 subprojects {
   repositories {
@@ -35,9 +37,7 @@ subprojects {
     "max_line_length" to 120,
   )
 
-  apply(plugin = "io.gitlab.arturbosch.detekt")
   apply(plugin = "com.diffplug.spotless")
-
   configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
       target("**/src/*.kt")
@@ -57,4 +57,6 @@ subprojects {
       endWithNewline()
     }
   }
+
+  apply(plugin = "io.gitlab.arturbosch.detekt")
 }
