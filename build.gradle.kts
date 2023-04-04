@@ -35,6 +35,7 @@ subprojects {
     "max_line_length" to 120,
   )
 
+  apply(plugin = "io.gitlab.arturbosch.detekt")
   apply(plugin = "com.diffplug.spotless")
 
   configure<com.diffplug.gradle.spotless.SpotlessExtension> {

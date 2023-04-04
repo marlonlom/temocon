@@ -8,7 +8,7 @@
 */
 
 /*TODO: remove this if warning does not happen again in future updates */
-@file:Suppress("UnstableApiUsage","DSL_SCOPE_VIOLATION")
+@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
 
 plugins {
   alias(libs.plugins.android.application)
@@ -69,3 +69,5 @@ dependencies {
   testImplementation(libs.junit)
   androidTestImplementation(libs.bundles.androidTest)
 }
+
+apply(plugin = "io.gitlab.arturbosch.detekt")
