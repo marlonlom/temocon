@@ -60,6 +60,6 @@ subprojects {
 
   apply(plugin = "io.gitlab.arturbosch.detekt")
   configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
-    config = project.files("detekt/detekt_config.yml")
+    config = project.files("${project.rootDir}/detekt/detekt_config.yml")
   }
 }
