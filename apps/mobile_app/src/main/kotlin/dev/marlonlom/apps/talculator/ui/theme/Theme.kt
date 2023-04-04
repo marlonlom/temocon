@@ -89,6 +89,15 @@ private val DarkColorScheme = darkColorScheme(
   scrim = md_theme_dark_scrim,
 )
 
+internal class NotAnActivityException(message: String = "Not in an activity - unable to get Window reference") :
+  Exception(message)
+
+/**
+ * Talculator application theme composable function.
+ *
+ * @author marlonlom
+ *
+ */
 @Composable
 fun TalculatorTheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
@@ -106,7 +115,7 @@ fun TalculatorTheme(
   val view = LocalView.current
   if (!view.isInEditMode) {
     val currentWindow = (view.context as? Activity)?.window
-      ?: throw Exception("Not in an activity - unable to get Window reference")
+      ?: throw NotAnActivityException()
     SideEffect {
       currentWindow.statusBarColor = colorScheme.primary.toArgb()
       WindowCompat.getInsetsController(currentWindow, view).isAppearanceLightStatusBars = darkTheme
