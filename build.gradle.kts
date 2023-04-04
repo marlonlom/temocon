@@ -8,7 +8,8 @@
  */
 
 /*TODO: remove this if warning does not happen again in future updates */
-@Suppress("DSL_SCOPE_VIOLATION")
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
