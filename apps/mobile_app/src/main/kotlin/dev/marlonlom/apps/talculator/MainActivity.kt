@@ -13,6 +13,11 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import dev.marlonlom.apps.talculator.ui.theme.TalculatorTheme
 
+/**
+ * Main Activity class.
+ *
+ * @author marlonlom
+ */
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -35,11 +40,24 @@ private fun TalculatorAppContent() {
   }
 }
 
+/**
+ * Greeting screen composable function.
+ *
+ * @author marlonlom
+ *
+ * @param name a name for the greeting.
+ */
 @Composable
 fun Greeting(name: String) {
   Text(text = "Hello $name!")
 }
 
+/**
+ * Greeting screen preview composable function.
+ *
+ * @author marlonlom
+ *
+ */
 @Preview(showBackground = true, device = Devices.PIXEL_4, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
