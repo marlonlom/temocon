@@ -1,19 +1,20 @@
 /*
- * Copyright 2023 Marlonlom
- *
- * Use of this source code is governed by an MIT-style
- * license that can be found in the LICENSE file or at
- * https://opensource.org/licenses/MIT.
- *
- */
+* Copyright 2023 Marlonlom
+*
+* Use of this source code is governed by an MIT-style
+* license that can be found in the LICENSE file or at
+* https://opensource.org/licenses/MIT.
+*
+*/
+
+/*TODO: remove this if warning does not happen again in future updates */
+@file:Suppress("UnstableApiUsage","DSL_SCOPE_VIOLATION")
 
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
 }
 
-/*TODO: remove this if warning does not happen again in future updates */
-@Suppress("UnstableApiUsage")
 android {
   namespace = "dev.marlonlom.apps.talculator"
   compileSdk = 33
