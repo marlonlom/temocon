@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  *
 */
-package dev.marlonlom.apps.talculator
+package dev.marlonlom.apps.temocon
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

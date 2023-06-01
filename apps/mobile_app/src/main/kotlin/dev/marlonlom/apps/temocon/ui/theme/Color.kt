@@ -6,10 +6,10 @@
  * https://opensource.org/licenses/MIT.
  *
 */
-package dev.marlonlom.apps.talculator.ui.theme
+package dev.marlonlom.apps.temocon.ui.theme
 
 import androidx.compose.ui.graphics.Color
-import dev.marlonlom.apps.talculator.R
+import dev.marlonlom.apps.temocon.R
 
 /* Brand colors */
 private object BrandColors {

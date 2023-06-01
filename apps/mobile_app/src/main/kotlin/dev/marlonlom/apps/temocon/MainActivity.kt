@@ -1,4 +1,4 @@
-package dev.marlonlom.apps.talculator
+package dev.marlonlom.apps.temocon
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import dev.marlonlom.apps.talculator.ui.theme.TalculatorTheme
+import dev.marlonlom.apps.temocon.ui.theme.TalculatorTheme
 
 /**
  * Main Activity class.

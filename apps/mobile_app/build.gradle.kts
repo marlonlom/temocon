@@ -16,11 +16,11 @@ plugins {
 }
 
 android {
-  namespace = "dev.marlonlom.apps.talculator"
+  namespace = "dev.marlonlom.apps.temocon"
   compileSdk = 33
 
   defaultConfig {
-    applicationId = "dev.marlonlom.apps.talculator"
+    applicationId = "dev.marlonlom.apps.temocon"
     minSdk = 24
     targetSdk = 33
     versionCode = 1

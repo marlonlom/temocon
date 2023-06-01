@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  *
 */
-package dev.marlonlom.apps.talculator.ui.theme
+package dev.marlonlom.apps.temocon.ui.theme
 
 import android.app.Activity
 import android.os.Build

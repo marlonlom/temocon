@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  *
 */
-package dev.marlonlom.apps.talculator.ui.theme
+package dev.marlonlom.apps.temocon.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import dev.marlonlom.apps.talculator.R
+import dev.marlonlom.apps.temocon.R
 
 val barlowCondensedFontFamily = FontFamily(
   Font(R.font.barlow_condensed_regular),
