@@ -1,5 +1,5 @@
-# Temocon - Android App 
-![Build status](https://github.com/marlonlom/talculator/workflows/CI/badge.svg?branch=main)
+# Temocon - Android App
+![Build status](https://github.com/marlonlom/temocon/workflows/CI/badge.svg?branch=main)
 
 Android app for converting temperature units (celsius, fahrenheit, kelvin and rankine).
 

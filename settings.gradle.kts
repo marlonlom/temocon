@@ -25,7 +25,7 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "Talculator"
+rootProject.name = "Temocon"
 
 /* Including application modules */
 include(":apps:mobile_app")
