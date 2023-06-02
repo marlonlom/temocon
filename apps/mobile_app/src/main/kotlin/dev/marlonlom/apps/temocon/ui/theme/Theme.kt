@@ -99,7 +99,7 @@ internal class NotAnActivityException(message: String = "Not in an activity - un
  *
  */
 @Composable
-fun TalculatorTheme(
+fun TemoconTheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
   dynamicColor: Boolean = true,
   content: @Composable () -> Unit,

@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import dev.marlonlom.apps.temocon.ui.theme.TalculatorTheme
+import dev.marlonlom.apps.temocon.ui.theme.TemoconTheme
 
 /**
  * Main Activity class.
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun TalculatorAppContent() {
-  TalculatorTheme {
+  TemoconTheme {
     // A surface container using the 'background' color from the theme
     Surface(
       modifier = Modifier.fillMaxSize(),
@@ -61,7 +61,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true, device = Devices.PIXEL_4, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-  TalculatorTheme {
+  TemoconTheme {
     Greeting("Android")
   }
 }
