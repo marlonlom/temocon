@@ -81,7 +81,8 @@ fun canShowAboutButtonInTopBar(windowSizeClass: WindowSizeClass): Boolean {
     arrayOf(WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium).contains(windowSizeClass.widthSizeClass)
   val isCompactOrMediumHeight = arrayOf(
     WindowHeightSizeClass.Compact,
-    WindowHeightSizeClass.Medium
+    WindowHeightSizeClass.Medium,
+    WindowHeightSizeClass.Expanded
   ).contains(windowSizeClass.heightSizeClass)
 
   return isCompactWidth && isCompactOrMediumHeight
