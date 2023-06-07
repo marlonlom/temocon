@@ -3,65 +3,41 @@ package dev.marlonlom.apps.temocon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import dev.marlonlom.apps.temocon.ui.theme.TemoconTheme
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import dev.marlonlom.apps.temocon.ui.navigation.AppNavHost
 
 /**
  * Main Activity class.
  *
  * @author marlonlom
  */
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
-      TalculatorAppContent()
+      val windowSizeClass = calculateWindowSizeClass(this)
+      val navController = rememberNavController()
+      AppContent(navController, windowSizeClass)
     }
   }
 }
 
 @Composable
-private fun TalculatorAppContent() {
+private fun AppContent(
+  navController: NavHostController,
+  windowSizeClass: WindowSizeClass
+) {
   TemoconTheme {
-    // A surface container using the 'background' color from the theme
-    Surface(
-      modifier = Modifier.fillMaxSize(),
-      color = MaterialTheme.colorScheme.background,
-    ) {
-      Greeting("Android")
-    }
-  }
-}
-
-/**
- * Greeting screen composable function.
- *
- * @author marlonlom
- *
- * @param name a name for the greeting.
- */
-@Composable
-fun Greeting(name: String) {
-  Text(text = "Hello $name!")
-}
-
-/**
- * Greeting screen preview composable function.
- *
- * @author marlonlom
- *
- */
-@Preview(showBackground = true, device = Devices.PIXEL_4, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-  TemoconTheme {
-    Greeting("Android")
+    AppNavHost(
+      navController = navController,
+      windowSizeClass = windowSizeClass
+    )
   }
 }

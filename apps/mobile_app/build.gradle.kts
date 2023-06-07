@@ -64,7 +64,8 @@ android {
 dependencies {
   implementation(libs.bundles.androidx)
   implementation(libs.bundles.compose)
-  implementation(libs.material3)
+  implementation(libs.bundles.material3)
+  implementation(libs.timber)
   debugImplementation(libs.bundles.compose.debugOnly)
   testImplementation(libs.junit)
   androidTestImplementation(libs.bundles.androidTest)
