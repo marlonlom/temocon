@@ -12,9 +12,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.DarkMode
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.LightMode
+import androidx.compose.material.icons.twotone.DarkMode
+import androidx.compose.material.icons.twotone.Info
+import androidx.compose.material.icons.twotone.LightMode
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,6 +23,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,10 +44,12 @@ import java.util.Locale
 @Composable
 fun HomeTopBar(
   isSystemInDarkTheme: Boolean,
+  windowSizeClass: WindowSizeClass,
   navigateToAboutScreenAction: () -> Unit,
   toggleDarkThemeAction: (Boolean) -> Unit,
   modifier: Modifier = Modifier
 ) {
+  val canShowAboutButton = canShowAboutButtonInTopBar(windowSizeClass)
   CenterAlignedTopAppBar(title = {
     Text(
       text = stringResource(R.string.app_name),
@@ -58,17 +63,33 @@ fun HomeTopBar(
     IconButton(onClick = { toggleDarkThemeAction(!isSystemInDarkTheme) }) {
       ToggleDarkThemeIcon(isSystemInDarkTheme)
     }
-    IconButton(onClick = { navigateToAboutScreenAction() }) {
-      Icon(
-        imageVector = Icons.Rounded.Info, contentDescription = null, tint = MaterialTheme.colorScheme.primary
-      )
+
+    if (canShowAboutButton) {
+      IconButton(onClick = { navigateToAboutScreenAction() }) {
+        Icon(
+          imageVector = Icons.TwoTone.Info,
+          contentDescription = null,
+          tint = MaterialTheme.colorScheme.primary
+        )
+      }
     }
   })
 }
 
+fun canShowAboutButtonInTopBar(windowSizeClass: WindowSizeClass): Boolean {
+  val isCompactWidth =
+    arrayOf(WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium).contains(windowSizeClass.widthSizeClass)
+  val isCompactOrMediumHeight = arrayOf(
+    WindowHeightSizeClass.Compact,
+    WindowHeightSizeClass.Medium
+  ).contains(windowSizeClass.heightSizeClass)
+
+  return isCompactWidth && isCompactOrMediumHeight
+}
+
 @Composable
 private fun ToggleDarkThemeIcon(isSystemInDarkTheme: Boolean) {
-  val iconImageVector = if (isSystemInDarkTheme) Icons.Rounded.LightMode else Icons.Rounded.DarkMode
+  val iconImageVector = if (isSystemInDarkTheme) Icons.TwoTone.LightMode else Icons.TwoTone.DarkMode
   val iconContentDescription = stringResource(
     id = if (isSystemInDarkTheme) {
       R.string.home_toggle_theme_nondark_content_desc
@@ -86,10 +107,12 @@ private fun ToggleDarkThemeIcon(isSystemInDarkTheme: Boolean) {
 @Composable
 internal fun HomeScreenContent(
   innerPadding: PaddingValues,
+  windowSizeClass: WindowSizeClass,
   selectedIndex: Int,
   saveSelectedUnitIndexAction: (Int) -> Unit,
   modifier: Modifier = Modifier
 ) {
+  Timber.d("[HomeScreenContent] windowSizeClass=$windowSizeClass")
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -137,20 +160,12 @@ private fun ToggleTemperatureUnitButtons(
       val unitName = temperatureUnit.name.lowercase(Locale.getDefault())
       val unitSymbolTxt = stringArrayResource(id = R.array.home_temperature_unit_symbols)[index]
       OutlinedButton(
-        modifier = when (index) {
-          0 -> Modifier
-            .offset(0.dp, 0.dp)
-            .zIndex(if (selectedIndex == 0) 1f else 0f)
-
-          else -> Modifier
-            .offset((-1 * index).dp, 0.dp)
-            .zIndex(if (selectedIndex == index) 1f else 0f)
-        },
+        modifier = Modifier.getTemperatureUnitToggleButtonModifier(index, selectedIndex),
         onClick = {
           Timber.d("[ToggleTemperatureUnitButtons] Clicked on index $index for unit symbol [$unitSymbolTxt: $unitName]")
           saveSelectedUnitIndexAction(index)
         },
-        shape = roundedCornerShapeByTemperatureUnit(index, cornerRadius, temperatureUnits),
+        shape = getRoundedCornerShapeByTemperatureUnit(index, cornerRadius, temperatureUnits),
         border = BorderStroke(
           1.dp,
           if (selectedIndex == index) {
@@ -183,8 +198,21 @@ private fun ToggleTemperatureUnitButtons(
   }
 }
 
+private fun Modifier.getTemperatureUnitToggleButtonModifier(
+  index: Int,
+  selectedIndex: Int
+): Modifier = when (index) {
+  0 -> this
+    .offset(0.dp, 0.dp)
+    .zIndex(if (selectedIndex == 0) 1f else 0f)
+
+  else -> this
+    .offset((-1 * index).dp, 0.dp)
+    .zIndex(if (selectedIndex == index) 1f else 0f)
+}
+
 @Composable
-private fun roundedCornerShapeByTemperatureUnit(
+private fun getRoundedCornerShapeByTemperatureUnit(
   index: Int, cornerRadius: Dp, temperatureUnits: Array<TemperatureUnit>
 ): RoundedCornerShape = when (index) {
   0 -> RoundedCornerShape(

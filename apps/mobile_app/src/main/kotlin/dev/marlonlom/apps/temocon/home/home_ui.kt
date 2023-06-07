@@ -6,7 +6,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -19,13 +18,13 @@ fun HomeScreen(
   modifier: Modifier = Modifier,
   isSystemInDarkTheme: Boolean
 ) {
-  Timber.d("[HomeScreen] windowSizeClass=$windowSizeClass")
   Scaffold(
     containerColor = MaterialTheme.colorScheme.surface,
     contentColor = MaterialTheme.colorScheme.onSurface,
     topBar = {
       HomeTopBar(
         isSystemInDarkTheme = isSystemInDarkTheme,
+        windowSizeClass = windowSizeClass,
         navigateToAboutScreenAction = navigateToAboutScreenAction,
         toggleDarkThemeAction = toggleDarkThemeAction,
         modifier = modifier
@@ -34,6 +33,7 @@ fun HomeScreen(
     content = { innerPadding ->
       HomeScreenContent(
         innerPadding = innerPadding,
+        windowSizeClass = windowSizeClass,
         selectedIndex = selectedIndex,
         saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
         modifier = modifier
