@@ -50,7 +50,7 @@ class ReleaseTree : Timber.Tree() {
     if (priority == Log.ASSERT) {
       Log.wtf(tag, message)
     } else {
-      Log.println(priority, tag, message);
+      Log.println(priority, tag, message)
     }
   }
 

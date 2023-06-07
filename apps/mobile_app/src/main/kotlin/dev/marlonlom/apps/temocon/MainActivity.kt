@@ -3,14 +3,17 @@ package dev.marlonlom.apps.temocon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.runtime.Composable
-import dev.marlonlom.apps.temocon.ui.theme.TemoconTheme
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import dev.marlonlom.apps.temocon.ui.navigation.AppNavHost
+import dev.marlonlom.apps.temocon.ui.theme.TemoconTheme
 
 /**
  * Main Activity class.
@@ -34,10 +37,15 @@ private fun AppContent(
   navController: NavHostController,
   windowSizeClass: WindowSizeClass
 ) {
+  val selectedTemperatureUnitIndexState = rememberSaveable {
+    mutableStateOf(0)
+  }
   TemoconTheme {
     AppNavHost(
       navController = navController,
-      windowSizeClass = windowSizeClass
+      windowSizeClass = windowSizeClass,
+      selectedTemperatureUnitIndex = selectedTemperatureUnitIndexState,
+      isSystemInDarkTheme = isSystemInDarkTheme(),
     )
   }
 }

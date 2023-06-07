@@ -2,4 +2,12 @@
   <string name="app_name">Temocon</string>
   <string name="destination_home">home</string>
   <string name="destination_about">about</string>
+  <string name="home_toggle_theme_dark_content_desc">Turn on dark mode</string>
+  <string name="home_toggle_theme_nondark_content_desc">Turn on non-dark mode</string>
+  <string-array name="home_temperature_unit_symbols">
+    <item>°C</item>
+    <item>°F</item>
+    <item>°K</item>
+    <item>°R</item>
+  </string-array>
 </resources>
