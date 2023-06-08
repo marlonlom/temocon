@@ -6,6 +6,7 @@
  * https://opensource.org/licenses/MIT.
  *
 */
+
 package dev.marlonlom.apps.temocon.ui.theme
 
 import androidx.compose.ui.graphics.Color
