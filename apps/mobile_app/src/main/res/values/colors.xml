@@ -51,4 +51,5 @@
   <color name="brand_white">#FFFFFFFF</color>
   <color name="brand_zumthor">#FFC0C8CC</color>
 
+  <color name="splash_surface">#FFFAFCFF</color>
 </resources>

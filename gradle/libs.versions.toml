@@ -12,6 +12,7 @@ material3 = "1.2.0-alpha02"
 androidx-core = "androidx.core:core-ktx:1.9.0"
 androidx-lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 androidx-activity = "androidx.activity:activity-compose:1.6.1"
+androidx-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-navigation = "androidx.navigation:navigation-compose:2.6.0-alpha09"
@@ -34,8 +35,8 @@ androidx-test-espresso-core = "androidx.test.espresso:espresso-core:3.5.1"
 compose-ui-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 
 [bundles]
-androidx = ["androidx-core", "androidx-lifecycle", "androidx-activity", "preferences-datastore"]
-androidx-lifecycle = ["lifecycle-viewmodel-compose","lifecycle-runtime-compose","lifecycle-viewmodel-ktx"]
+androidx = ["androidx-core", "androidx-lifecycle", "androidx-activity", "androidx-splashscreen", "preferences-datastore"]
+androidx-lifecycle = ["lifecycle-viewmodel-compose", "lifecycle-runtime-compose", "lifecycle-viewmodel-ktx"]
 androidTest = ["androidx-test-ext-junit", "androidx-test-espresso-core", "compose-ui-junit4"]
 compose = ["compose-ui", "compose-ui-tooling", "compose-navigation"]
 compose-debugOnly = ["compose-ui-tooling-preview", "compose-ui-test-manifest"]
