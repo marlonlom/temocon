@@ -5,7 +5,7 @@ compose-compiler = "1.4.0"
 gradleplugin = "8.0.2"
 kotlin = "1.8.0"
 detekt = "1.22.0"
-material3 = "1.1.0-alpha06"
+material3 = "1.2.0-alpha02"
 
 [libraries]
 # implementation
@@ -15,9 +15,13 @@ androidx-activity = "androidx.activity:activity-compose:1.6.1"
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-navigation = "androidx.navigation:navigation-compose:2.6.0-alpha09"
+lifecycle-viewmodel-compose = "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+lifecycle-runtime-compose = "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
+lifecycle-viewmodel-ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 material3-windowsizeclass = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "material3" }
 material-icons-extended = "androidx.compose.material:material-icons-extended:1.5.0-alpha04"
+preferences-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 timber = "com.jakewharton.timber:timber:5.0.1"
 # debugImplementation
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
@@ -30,7 +34,8 @@ androidx-test-espresso-core = "androidx.test.espresso:espresso-core:3.5.1"
 compose-ui-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 
 [bundles]
-androidx = ["androidx-core", "androidx-lifecycle", "androidx-activity"]
+androidx = ["androidx-core", "androidx-lifecycle", "androidx-activity", "preferences-datastore"]
+androidx-lifecycle = ["lifecycle-viewmodel-compose","lifecycle-runtime-compose","lifecycle-viewmodel-ktx"]
 androidTest = ["androidx-test-ext-junit", "androidx-test-espresso-core", "compose-ui-junit4"]
 compose = ["compose-ui", "compose-ui-tooling", "compose-navigation"]
 compose-debugOnly = ["compose-ui-tooling-preview", "compose-ui-test-manifest"]

@@ -64,6 +64,7 @@ android {
 dependencies {
   implementation(files("libs/temocon-core-1.0.0.jar"))
   implementation(libs.bundles.androidx)
+  implementation(libs.bundles.androidx.lifecycle)
   implementation(libs.bundles.compose)
   implementation(libs.bundles.material3)
   implementation(libs.timber)
