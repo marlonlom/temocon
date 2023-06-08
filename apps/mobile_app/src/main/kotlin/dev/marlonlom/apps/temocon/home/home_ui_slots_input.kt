@@ -54,41 +54,58 @@ private fun ToggleTemperatureUnitButtons(
     val temperatureUnits = TemperatureUnit.values()
     temperatureUnits.forEachIndexed { index: Int, _: TemperatureUnit ->
       val unitSymbolTxt = stringArrayResource(id = R.array.home_temperature_unit_symbols)[index]
-
-      OutlinedButton(
-        modifier = Modifier.getTemperatureUnitToggleButtonModifier(index, uiState.value.selectedTemperatureUnitIndex),
-        onClick = {
-          currentSaveSelectedUnitIndexAction(index)
-        },
-        shape = getRoundedCornerShapeByTemperatureUnit(index, cornerRadius, temperatureUnits),
-        border = BorderStroke(
-          1.dp, if (uiState.value.selectedTemperatureUnitIndex == index) {
-            MaterialTheme.colorScheme.primary
-          } else {
-            Color.DarkGray.copy(alpha = 0.75f)
-          }
-        ),
-        colors = if (uiState.value.selectedTemperatureUnitIndex == index) {
-          ButtonDefaults.outlinedButtonColors(
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-            contentColor = MaterialTheme.colorScheme.primary
-          )
-        } else {
-          ButtonDefaults.outlinedButtonColors(
-            containerColor = MaterialTheme.colorScheme.surface, contentColor = MaterialTheme.colorScheme.primary
-          )
-        }
-      ) {
-        Text(
-          text = unitSymbolTxt,
-          color = MaterialTheme.colorScheme.onSurface,
-          fontWeight = FontWeight.Medium,
-          modifier = Modifier.padding(horizontal = 8.dp)
-        )
-      }
-
+      TemperatureUnitOutlinedButton(
+        index = index,
+        uiState = uiState,
+        currentSaveSelectedUnitIndexAction = currentSaveSelectedUnitIndexAction,
+        cornerRadius = cornerRadius,
+        temperatureUnits = temperatureUnits,
+        unitSymbolTxt = unitSymbolTxt
+      )
     }
     Spacer(modifier = Modifier.weight(1f))
+  }
+}
+
+@Composable
+private fun TemperatureUnitOutlinedButton(
+  index: Int,
+  uiState: State<HomeUiState>,
+  currentSaveSelectedUnitIndexAction: (Int) -> Unit,
+  cornerRadius: Dp,
+  temperatureUnits: Array<TemperatureUnit>,
+  unitSymbolTxt: String
+) {
+  OutlinedButton(
+    modifier = Modifier.getTemperatureUnitToggleButtonModifier(index, uiState.value.selectedTemperatureUnitIndex),
+    onClick = {
+      currentSaveSelectedUnitIndexAction(index)
+    },
+    shape = getRoundedCornerShapeByTemperatureUnit(index, cornerRadius, temperatureUnits),
+    border = BorderStroke(
+      1.dp, if (uiState.value.selectedTemperatureUnitIndex == index) {
+        MaterialTheme.colorScheme.primary
+      } else {
+        Color.DarkGray.copy(alpha = 0.75f)
+      }
+    ),
+    colors = if (uiState.value.selectedTemperatureUnitIndex == index) {
+      ButtonDefaults.outlinedButtonColors(
+        containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+        contentColor = MaterialTheme.colorScheme.primary
+      )
+    } else {
+      ButtonDefaults.outlinedButtonColors(
+        containerColor = MaterialTheme.colorScheme.surface, contentColor = MaterialTheme.colorScheme.primary
+      )
+    }
+  ) {
+    Text(
+      text = unitSymbolTxt,
+      color = MaterialTheme.colorScheme.onSurface,
+      fontWeight = FontWeight.Medium,
+      modifier = Modifier.padding(horizontal = 8.dp)
+    )
   }
 }
 
