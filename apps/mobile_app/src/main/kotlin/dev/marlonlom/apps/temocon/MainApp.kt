@@ -13,6 +13,11 @@ import android.app.Application
 import dev.marlonlom.apps.temocon.ui.logging.timber.ReleaseTree
 import timber.log.Timber
 
+/**
+ * Main application class.
+ *
+ * @author marlonlom
+ */
 class MainApp : Application() {
   override fun onCreate() {
     super.onCreate()

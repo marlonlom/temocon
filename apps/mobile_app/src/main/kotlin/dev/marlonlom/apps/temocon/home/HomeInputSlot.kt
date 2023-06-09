@@ -35,13 +35,20 @@ import androidx.compose.ui.zIndex
 import dev.marlonlom.apps.temocon.R
 import dev.marlonlom.utilities.temocon.core.TemperatureUnit
 
+/**
+ * Home input slot composable ui class.
+ *
+ * @author marlonlom
+ *
+ * @param
+ */
 @Composable
-fun InputSlot(
-  uiState: State<HomeUiState>, saveSelectedUnitIndexAction: (Int) -> Unit, modifier: Modifier = Modifier
+fun HomeInputSlot(
+  uiState: State<HomeUiState>, saveSelectedUnitIndexAction: (Int) -> Unit
 ) {
   Column {
     ToggleTemperatureUnitButtons(
-      uiState = uiState, saveSelectedUnitIndexAction = saveSelectedUnitIndexAction, modifier = modifier
+      uiState = uiState, saveSelectedUnitIndexAction = saveSelectedUnitIndexAction
     )
   }
 }
@@ -49,13 +56,11 @@ fun InputSlot(
 @Composable
 private fun ToggleTemperatureUnitButtons(
   uiState: State<HomeUiState>,
-  saveSelectedUnitIndexAction: (Int) -> Unit,
-  modifier: Modifier = Modifier
+  saveSelectedUnitIndexAction: (Int) -> Unit
 ) {
   val currentSaveSelectedUnitIndexAction by rememberUpdatedState(saveSelectedUnitIndexAction)
-  val cornerRadius = 20.dp
   Row(
-    modifier = modifier
+    modifier = Modifier
       .fillMaxWidth()
       .padding(8.dp)
   ) {
@@ -67,24 +72,28 @@ private fun ToggleTemperatureUnitButtons(
         index = index,
         uiState = uiState,
         currentSaveSelectedUnitIndexAction = currentSaveSelectedUnitIndexAction,
-        cornerRadius = cornerRadius,
         temperatureUnits = temperatureUnits,
-        unitSymbolTxt = unitSymbolTxt
+        unitSymbolText = unitSymbolTxt
       )
     }
     Spacer(modifier = Modifier.weight(1f))
   }
 }
 
+/**
+ * Temperature outline button composable ui function.
+ *
+ * @author marlonlom
+ */
 @Composable
 private fun TemperatureUnitOutlinedButton(
   index: Int,
   uiState: State<HomeUiState>,
   currentSaveSelectedUnitIndexAction: (Int) -> Unit,
-  cornerRadius: Dp,
   temperatureUnits: Array<TemperatureUnit>,
-  unitSymbolTxt: String
+  unitSymbolText: String
 ) {
+  val cornerRadius: Dp = 20.dp
   OutlinedButton(
     modifier = Modifier.getTemperatureUnitToggleButtonModifier(index, uiState.value.selectedTemperatureUnitIndex),
     onClick = {
@@ -110,7 +119,7 @@ private fun TemperatureUnitOutlinedButton(
     }
   ) {
     Text(
-      text = unitSymbolTxt,
+      text = unitSymbolText,
       color = MaterialTheme.colorScheme.onSurface,
       fontWeight = FontWeight.Medium,
       modifier = Modifier.padding(horizontal = 8.dp)

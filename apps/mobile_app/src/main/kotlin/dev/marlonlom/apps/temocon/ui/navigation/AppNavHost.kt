@@ -17,7 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.marlonlom.apps.temocon.R
-import dev.marlonlom.apps.temocon.about.AboutScreen
+import dev.marlonlom.apps.temocon.about.AboutRoute
 import dev.marlonlom.apps.temocon.home.HomeRoute
 import dev.marlonlom.apps.temocon.home.HomeViewModel
 
@@ -57,7 +57,7 @@ fun AppNavHost(
     }
 
     composable(route = aboutRoute) {
-      AboutScreen(navigateBackToHomeAction = {
+      AboutRoute(navigateBackToHomeAction = {
         navController.popBackStack()
       })
     }

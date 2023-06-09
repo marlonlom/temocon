@@ -9,7 +9,6 @@
 
 package dev.marlonlom.apps.temocon.home
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,15 +24,18 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import timber.log.Timber
 
-@SuppressLint("FlowOperatorInvokedInComposition")
+/**
+ * Application home route composable ui class.
+ *
+ * @author marlonlom
+ */
 @Composable
 fun HomeRoute(
   viewModel: HomeViewModel,
   windowSizeClass: WindowSizeClass,
   navigateToAboutScreenAction: () -> Unit,
   toggleDarkThemeAction: (Boolean) -> Unit,
-  saveSelectedUnitIndexAction: (Int) -> Unit,
-  modifier: Modifier = Modifier
+  saveSelectedUnitIndexAction: (Int) -> Unit
 ) {
   val uiState = viewModel.uiState.collectAsStateWithLifecycle()
   Timber.d("[HomeRoute] uiState: $uiState")
@@ -45,8 +47,7 @@ fun HomeRoute(
         uiState = uiState,
         windowSizeClass = windowSizeClass,
         navigateToAboutScreenAction = navigateToAboutScreenAction,
-        toggleDarkThemeAction = toggleDarkThemeAction,
-        modifier = modifier
+        toggleDarkThemeAction = toggleDarkThemeAction
       )
     },
     content = { innerPadding: PaddingValues ->
@@ -54,32 +55,31 @@ fun HomeRoute(
         uiState = uiState,
         innerPadding = innerPadding,
         windowSizeClass = windowSizeClass,
-        saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
-        modifier = modifier
+        saveSelectedUnitIndexAction = saveSelectedUnitIndexAction
       )
-    }
-  )
+    })
 }
 
+/**
+ * Application home route inner content composable ui class.
+ *
+ * @author marlonlom
+ */
 @Composable
 fun HomeScreenContent(
   uiState: State<HomeUiState>,
   innerPadding: PaddingValues,
   windowSizeClass: WindowSizeClass,
-  saveSelectedUnitIndexAction: (Int) -> Unit,
-  modifier: Modifier = Modifier
+  saveSelectedUnitIndexAction: (Int) -> Unit
 ) {
   Timber.d("[HomeScreenContent] windowSizeClass=$windowSizeClass")
   Column(
     modifier = Modifier
       .fillMaxSize()
-      .padding(innerPadding),
-    verticalArrangement = Arrangement.spacedBy(8.dp)
+      .padding(innerPadding), verticalArrangement = Arrangement.spacedBy(8.dp)
   ) {
-    InputSlot(
-      uiState = uiState,
-      saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
-      modifier = modifier
+    HomeInputSlot(
+      uiState = uiState, saveSelectedUnitIndexAction = saveSelectedUnitIndexAction
     )
   }
 }

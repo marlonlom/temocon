@@ -24,27 +24,29 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import dev.marlonlom.apps.temocon.R
 
 
+/**
+ * Application home top bar composable ui class.
+ *
+ * @author marlonlom
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeTopBar(
   uiState: State<HomeUiState>,
   windowSizeClass: WindowSizeClass,
   navigateToAboutScreenAction: () -> Unit,
-  toggleDarkThemeAction: (Boolean) -> Unit,
-  modifier: Modifier = Modifier
+  toggleDarkThemeAction: (Boolean) -> Unit
 ) {
   val canShowAboutButton = canShowAboutButtonInTopBar(windowSizeClass)
   CenterAlignedTopAppBar(
     title = {
       Text(
         text = stringResource(R.string.app_name),
-        modifier = modifier,
         fontWeight = FontWeight.Medium,
         maxLines = 1,
         style = MaterialTheme.typography.headlineSmall,
@@ -74,6 +76,13 @@ fun HomeTopBar(
   )
 }
 
+/**
+ * Returns true/false if the show about button should appear in the top bar.
+ *
+ * @param windowSizeClass window size class object instance.
+ *
+ * @return true/false if the show about button should appear in the top bar.
+ */
 fun canShowAboutButtonInTopBar(windowSizeClass: WindowSizeClass): Boolean {
   val isCompactWidth =
     arrayOf(WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium).contains(windowSizeClass.widthSizeClass)

@@ -12,8 +12,15 @@ package dev.marlonlom.apps.temocon.about
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
+/**
+ * Application about screen composable ui function.
+ *
+ * @author marlonlom
+ *
+ * @param navigateBackToHomeAction action event for navigating back to home screen.
+ */
 @Composable
-fun AboutScreen(
+fun AboutRoute(
   navigateBackToHomeAction: () -> Unit
 ) {
   Text(text = "About")
