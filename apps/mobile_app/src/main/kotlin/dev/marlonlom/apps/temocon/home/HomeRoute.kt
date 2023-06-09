@@ -35,7 +35,8 @@ fun HomeRoute(
   windowSizeClass: WindowSizeClass,
   navigateToAboutScreenAction: () -> Unit,
   toggleDarkThemeAction: (Boolean) -> Unit,
-  saveSelectedUnitIndexAction: (Int) -> Unit
+  saveSelectedUnitIndexAction: (Int) -> Unit,
+  onTemperatureValueValueChanged: (Double) -> Unit
 ) {
   val uiState = viewModel.uiState.collectAsStateWithLifecycle()
   Timber.d("[HomeRoute] uiState: $uiState")
@@ -55,7 +56,8 @@ fun HomeRoute(
         uiState = uiState,
         innerPadding = innerPadding,
         windowSizeClass = windowSizeClass,
-        saveSelectedUnitIndexAction = saveSelectedUnitIndexAction
+        saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
+        onTemperatureValueValueChanged = onTemperatureValueValueChanged
       )
     })
 }
@@ -70,7 +72,8 @@ fun HomeScreenContent(
   uiState: State<HomeUiState>,
   innerPadding: PaddingValues,
   windowSizeClass: WindowSizeClass,
-  saveSelectedUnitIndexAction: (Int) -> Unit
+  saveSelectedUnitIndexAction: (Int) -> Unit,
+  onTemperatureValueValueChanged: (Double) -> Unit
 ) {
   Timber.d("[HomeScreenContent] windowSizeClass=$windowSizeClass")
   Column(
@@ -79,7 +82,9 @@ fun HomeScreenContent(
       .padding(innerPadding), verticalArrangement = Arrangement.spacedBy(8.dp)
   ) {
     HomeInputSlot(
-      uiState = uiState, saveSelectedUnitIndexAction = saveSelectedUnitIndexAction
+      uiState = uiState,
+      saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
+      onTemperatureValueValueChanged = onTemperatureValueValueChanged
     )
   }
 }

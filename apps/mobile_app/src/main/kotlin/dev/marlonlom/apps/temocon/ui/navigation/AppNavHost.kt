@@ -20,6 +20,7 @@ import dev.marlonlom.apps.temocon.R
 import dev.marlonlom.apps.temocon.about.AboutRoute
 import dev.marlonlom.apps.temocon.home.HomeRoute
 import dev.marlonlom.apps.temocon.home.HomeViewModel
+import timber.log.Timber
 
 /**
  * Application navigation host class.
@@ -52,6 +53,11 @@ fun AppNavHost(
         },
         saveSelectedUnitIndexAction = { index: Int ->
           homeViewModel.updateSelectedTemperatureUnitIndex(index)
+        },
+        onTemperatureValueValueChanged = { temperatureValue: Double ->
+          Timber.d(
+            "[onTemperatureValueValueChanged] value=$temperatureValue"
+          )
         }
       )
     }
