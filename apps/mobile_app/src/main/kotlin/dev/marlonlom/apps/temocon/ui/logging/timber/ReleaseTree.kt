@@ -13,6 +13,11 @@ import android.annotation.SuppressLint
 import android.util.Log
 import timber.log.Timber
 
+/**
+ * Timber release tree class.
+ *
+ * @author marlonlom
+ */
 class ReleaseTree : Timber.Tree() {
   companion object {
     private const val MAX_LOG_LENGTH: Int = 4000
