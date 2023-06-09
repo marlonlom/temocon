@@ -24,24 +24,61 @@ import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import java.io.IOException
 
+/**
+ * Application preferences store state data class.
+ *
+ * @author marlonlom
+ */
 data class PreferencesStoreState(
   val isNightMode: Boolean,
   val defaultTemperatureUnitIndex: Int
 )
 
+/**
+ * Application preferences store definition interface.
+ *
+ * @author marlonlom
+ */
 interface PreferencesStore {
+  /**
+   * Gets the application preferences store state as a flow.
+   *
+   * @return Flow<PreferencesStoreState>
+   */
   fun getPreferencesStoreState(): Flow<PreferencesStoreState>
+
+  /**
+   * Toggles application dark theme applied flag.
+   *
+   * @param isDarkTheme true/false if application flag for dark theme is applying
+   */
   suspend fun toggleNightMode(isDarkTheme: Boolean = false)
+
+  /**
+   * Saves application selected temperature unit index.
+   *
+   * @param selectedIndex selected temperature unit index.
+   */
   suspend fun saveSelectedTemperatureUnitIndex(selectedIndex: Int)
 }
 
 private val Context.dataStore by preferencesDataStore("app_preferences")
 
+/**
+ * Application preferences store keys object instance.
+ *
+ * @author marlonlom
+ */
 private object PreferencesStoreKeys {
   val NIGHT_MODE_KEY = booleanPreferencesKey("dark_theme_enabled")
   val DEFAULT_TEMPERATURE_UNIT_INDEX = intPreferencesKey("default_temperature_unit_index")
 }
 
+/**
+ * Application preferences store implementation class.
+ *
+ * @author marlonlom
+ */
 class PreferencesStoreImpl
 constructor(
   private val context: Context

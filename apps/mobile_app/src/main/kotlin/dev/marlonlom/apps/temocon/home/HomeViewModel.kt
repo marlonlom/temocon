@@ -20,7 +20,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-
+/**
+ * Home screen ui state data class.
+ *
+ * @author marlonlom
+ */
 data class HomeUiState(
   val isAppInDarkTheme: Boolean = false,
   val selectedTemperatureUnitIndex: Int = 0,
@@ -28,6 +32,11 @@ data class HomeUiState(
   var temperatureResponse: TemperatureConvertResponse?
 )
 
+/**
+ * Home screen ui view model class.
+ *
+ * @author marlonlom
+ */
 class HomeViewModel(
   private val preferencesStore: PreferencesStore
 ) : ViewModel() {
@@ -53,6 +62,11 @@ class HomeViewModel(
     }
   }
 
+  /**
+   * Toggles IsAppInDarkTheme flag to true/false.
+   *
+   * @param isDarkTheme true/false if application is in dark theme.
+   */
   fun toggleIsAppInDarkThemeFlag(isDarkTheme: Boolean) {
     viewModelScope.launch {
       preferencesStore.toggleNightMode(isDarkTheme)
@@ -64,6 +78,11 @@ class HomeViewModel(
     }
   }
 
+  /**
+   * Updates selected temperature unit index from button click in the ui.
+   *
+   * @param selectedIndex selected temperature unit index from the ui.
+   */
   fun updateSelectedTemperatureUnitIndex(selectedIndex: Int) {
     viewModelScope.launch {
       preferencesStore.saveSelectedTemperatureUnitIndex(selectedIndex)
@@ -80,6 +99,12 @@ class HomeViewModel(
       temperatureResponse = null
     )
 
+    /**
+     * Provides home view model factory class instance.
+     *
+     * @param preferencesStore application preferences store instance.
+     * @return ViewModelProvider.Factory
+     */
     fun provideFactory(
       preferencesStore: PreferencesStore
     ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {

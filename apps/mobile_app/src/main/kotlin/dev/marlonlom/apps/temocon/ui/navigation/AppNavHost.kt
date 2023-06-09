@@ -21,11 +21,12 @@ import dev.marlonlom.apps.temocon.about.AboutScreen
 import dev.marlonlom.apps.temocon.home.HomeRoute
 import dev.marlonlom.apps.temocon.home.HomeViewModel
 
-sealed class Destination(@StringRes val route: Int) {
-  object Home : Destination(R.string.destination_home)
-  object About : Destination(R.string.destination_about)
-}
-
+/**
+ * Application navigation host class.
+ *
+ * @author marlonlom
+ *
+ */
 @Composable
 fun AppNavHost(
   navController: NavHostController,
@@ -63,3 +64,26 @@ fun AppNavHost(
   }
 }
 
+
+/**
+ * Application navigation destination sealed class.
+ *
+ * @author marlonlom
+ *
+ */
+sealed class Destination(@StringRes val route: Int) {
+
+  /**
+   * Application home destination object instance.
+   *
+   * @author marlonlom
+   */
+  object Home : Destination(R.string.destination_home)
+
+  /**
+   * Application about destination object instance.
+   *
+   * @author marlonlom
+   */
+  object About : Destination(R.string.destination_about)
+}
