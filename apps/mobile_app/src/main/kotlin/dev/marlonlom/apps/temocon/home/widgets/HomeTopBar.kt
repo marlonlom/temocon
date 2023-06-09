@@ -7,7 +7,7 @@
 *
 */
 
-package dev.marlonlom.apps.temocon.home
+package dev.marlonlom.apps.temocon.home.widgets
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.DarkMode
@@ -27,6 +27,7 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import dev.marlonlom.apps.temocon.R
+import dev.marlonlom.apps.temocon.home.HomeUiState
 
 
 /**

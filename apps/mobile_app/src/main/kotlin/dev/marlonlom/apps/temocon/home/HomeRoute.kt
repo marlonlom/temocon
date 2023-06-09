@@ -22,6 +22,8 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.marlonlom.apps.temocon.home.widgets.HomeTopBar
+import dev.marlonlom.apps.temocon.home.slots.HomeInputSlot
 import timber.log.Timber
 
 /**
@@ -36,7 +38,7 @@ fun HomeRoute(
   navigateToAboutScreenAction: () -> Unit,
   toggleDarkThemeAction: (Boolean) -> Unit,
   saveSelectedUnitIndexAction: (Int) -> Unit,
-  onTemperatureValueValueChanged: (Double) -> Unit
+  onTemperatureValueChanged: (Double) -> Unit
 ) {
   val uiState = viewModel.uiState.collectAsStateWithLifecycle()
   Timber.d("[HomeRoute] uiState: $uiState")
@@ -57,7 +59,7 @@ fun HomeRoute(
         innerPadding = innerPadding,
         windowSizeClass = windowSizeClass,
         saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
-        onTemperatureValueValueChanged = onTemperatureValueValueChanged
+        onTemperatureValueChanged = onTemperatureValueChanged
       )
     })
 }
@@ -73,7 +75,7 @@ fun HomeScreenContent(
   innerPadding: PaddingValues,
   windowSizeClass: WindowSizeClass,
   saveSelectedUnitIndexAction: (Int) -> Unit,
-  onTemperatureValueValueChanged: (Double) -> Unit
+  onTemperatureValueChanged: (Double) -> Unit
 ) {
   Timber.d("[HomeScreenContent] windowSizeClass=$windowSizeClass")
   Column(
@@ -84,7 +86,7 @@ fun HomeScreenContent(
     HomeInputSlot(
       uiState = uiState,
       saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
-      onTemperatureValueValueChanged = onTemperatureValueValueChanged
+      onTemperatureValueChanged = onTemperatureValueChanged
     )
   }
 }

@@ -13,7 +13,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import dev.marlonlom.apps.temocon.ui.preferences.PreferencesStore
+import dev.marlonlom.utilities.temocon.core.TemperatureConvertRequest
 import dev.marlonlom.utilities.temocon.core.TemperatureConvertResponse
+import dev.marlonlom.utilities.temocon.core.TemperatureConverter
+import dev.marlonlom.utilities.temocon.core.TemperatureUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -27,9 +30,7 @@ import kotlinx.coroutines.launch
  */
 data class HomeUiState(
   val isAppInDarkTheme: Boolean = false,
-  val selectedTemperatureUnitIndex: Int = 0,
-  val temperatureValue: Double = Double.NaN,
-  var temperatureResponse: TemperatureConvertResponse?
+  val selectedTemperatureUnitIndex: Int = 0
 )
 
 /**
@@ -38,16 +39,14 @@ data class HomeUiState(
  * @author marlonlom
  */
 class HomeViewModel(
-  private val preferencesStore: PreferencesStore
+  private val preferencesStore: PreferencesStore,
+  private val temperatureConverter: TemperatureConverter = TemperatureConverter()
 ) : ViewModel() {
   private val _uiState = MutableStateFlow(initial)
+  private val _responseState = MutableStateFlow(initialResponse)
 
-  val uiState = _uiState
-    .stateIn(
-      viewModelScope,
-      SharingStarted.Eagerly,
-      initial
-    )
+  val uiState = _uiState.stateIn(viewModelScope, SharingStarted.Eagerly, initial)
+  val responseState = _uiState.stateIn(viewModelScope, SharingStarted.Eagerly, initialResponse)
 
   init {
     viewModelScope.launch {
@@ -94,9 +93,31 @@ class HomeViewModel(
     }
   }
 
+  /**
+   * Return conversion for selected temperature value.
+   *
+   * @param temperatureValue temperature value
+   */
+  fun convertTemperatureValue(temperatureValue: Double) {
+    viewModelScope.launch {
+      val request = TemperatureConvertRequest(
+        temperatureUnit = TemperatureUnit.values()[_uiState.value.selectedTemperatureUnitIndex],
+        valueToConvert = temperatureValue
+      )
+      val response = temperatureConverter.calculate(
+        request = request
+      )
+      _responseState.value = response
+    }
+  }
+
   companion object {
-    private val initial = HomeUiState(
-      temperatureResponse = null
+    private val initial = HomeUiState()
+    private val initialResponse = TemperatureConvertResponse(
+      celsiusValue = Double.NaN,
+      fahrenheitValue = Double.NaN,
+      kelvinValue = Double.NaN,
+      rankineValue = Double.NaN
     )
 
     /**
