@@ -31,88 +31,113 @@ private object BrandFont {
     )
   )
 
+  private val SIXTY_FOUR_SP = 64.sp
+  private val FIFTY_SEVEN_SP = 57.sp
+  private val FIFTY_TWO_SP = 52.sp
+  private val FORTY_FIVE_SP = 45.sp
+  private val FORTY_FOUR_SP = 44.sp
+  private val FORTY_SP = 40.sp
+  private val THIRTY_SIX_SP = 36.sp
+  private val THIRTY_TWO_SP = 32.sp
+  private val TWENTY_EIGHT_SP = 28.sp
+  private val TWENTY_FOUR_SP = 24.sp
+  private val TWENTY_TWO_SP = 22.sp
+  private val TWENTY_SP = 20.sp
+  private val SIXTEEN_SP = 16.sp
+  private val FOURTEEN_SP = 14.sp
+  private val TWELVE_SP = 12.sp
+  private val ELEVEN_SP = 11.sp
+  private val ZERO_POINT_FIVE_SP = 0.5.sp
+  private val ZERO_POINT_FOUR_SP = 0.4.sp
+  private val ZERO_POINT_TWENTY_FIVE_SP = 0.25.sp
+  private val ZERO_POINT_FIFTEEN_SP = 0.15.sp
+  private val ZERO_POINT_ONE_SP = 0.1.sp
+  private val ZERO_SP = 0.sp
+  private const val NEG_ZERO_POINT_TWENTY_FIVE = -0.25
+  private val NEG_ZERO_POINT_TWENTY_FIVE_SP = NEG_ZERO_POINT_TWENTY_FIVE.sp
+
   val appTypography = Typography(
     displayLarge = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 57.sp, lineHeight = 64.sp, letterSpacing = (-0.25).sp
+      fontSize = FIFTY_SEVEN_SP, lineHeight = SIXTY_FOUR_SP, letterSpacing = NEG_ZERO_POINT_TWENTY_FIVE_SP
     ),
     displayMedium = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 45.sp, lineHeight = 52.sp, letterSpacing = 0.sp
+      fontSize = FORTY_FIVE_SP, lineHeight = FIFTY_TWO_SP, letterSpacing = ZERO_SP
     ),
     displaySmall = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 36.sp, lineHeight = 44.sp, letterSpacing = 0.sp
+      fontSize = THIRTY_SIX_SP, lineHeight = FORTY_FOUR_SP, letterSpacing = ZERO_SP
     ),
     headlineLarge = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 32.sp,
-      lineHeight = 40.sp,
-      letterSpacing = 0.sp,
+      fontSize = THIRTY_TWO_SP,
+      lineHeight = FORTY_SP,
+      letterSpacing = ZERO_SP,
       lineBreak = LineBreak.Heading,
     ),
     headlineMedium = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 28.sp,
-      lineHeight = 36.sp,
-      letterSpacing = 0.sp,
+      fontSize = TWENTY_EIGHT_SP,
+      lineHeight = THIRTY_SIX_SP,
+      letterSpacing = ZERO_SP,
       lineBreak = LineBreak.Heading,
     ),
     headlineSmall = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 24.sp,
-      lineHeight = 32.sp,
-      letterSpacing = 0.sp,
+      fontSize = TWENTY_FOUR_SP,
+      lineHeight = THIRTY_TWO_SP,
+      letterSpacing = ZERO_SP,
       lineBreak = LineBreak.Heading,
     ),
     titleLarge = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 22.sp,
-      lineHeight = 28.sp,
-      letterSpacing = 0.sp,
+      fontSize = TWENTY_TWO_SP,
+      lineHeight = TWENTY_EIGHT_SP,
+      letterSpacing = ZERO_SP,
       lineBreak = LineBreak.Heading,
     ),
     titleMedium = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 16.sp,
-      lineHeight = 24.sp,
-      letterSpacing = 0.15.sp,
+      fontSize = SIXTEEN_SP,
+      lineHeight = TWENTY_FOUR_SP,
+      letterSpacing = ZERO_POINT_FIFTEEN_SP,
       lineBreak = LineBreak.Heading,
     ),
     titleSmall = DEFAULT_TEXT_STYLE.copy(
       fontWeight = FontWeight.Medium,
-      fontSize = 14.sp,
-      lineHeight = 20.sp,
-      letterSpacing = 0.1.sp,
+      fontSize = FOURTEEN_SP,
+      lineHeight = TWENTY_SP,
+      letterSpacing = ZERO_POINT_ONE_SP,
       lineBreak = LineBreak.Heading,
     ),
     bodyLarge = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 16.sp,
-      lineHeight = 24.sp,
-      letterSpacing = 0.5.sp,
+      fontSize = SIXTEEN_SP,
+      lineHeight = TWENTY_FOUR_SP,
+      letterSpacing = ZERO_POINT_FIVE_SP,
       lineBreak = LineBreak.Heading,
     ),
     bodyMedium = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 14.sp,
-      lineHeight = 20.sp,
-      letterSpacing = 0.25.sp,
+      fontSize = FOURTEEN_SP,
+      lineHeight = TWENTY_SP,
+      letterSpacing = ZERO_POINT_TWENTY_FIVE_SP,
       lineBreak = LineBreak.Heading,
     ),
     bodySmall = DEFAULT_TEXT_STYLE.copy(
-      fontSize = 12.sp,
-      lineHeight = 16.sp,
-      letterSpacing = 0.4.sp,
+      fontSize = TWELVE_SP,
+      lineHeight = SIXTEEN_SP,
+      letterSpacing = ZERO_POINT_FOUR_SP,
       lineBreak = LineBreak.Heading,
     ),
     labelLarge = DEFAULT_TEXT_STYLE.copy(
       fontWeight = FontWeight.Medium,
-      fontSize = 14.sp,
-      lineHeight = 20.sp,
-      letterSpacing = 0.1.sp,
+      fontSize = FOURTEEN_SP,
+      lineHeight = TWENTY_SP,
+      letterSpacing = ZERO_POINT_ONE_SP,
     ),
     labelMedium = DEFAULT_TEXT_STYLE.copy(
       fontWeight = FontWeight.Medium,
-      fontSize = 12.sp,
-      lineHeight = 16.sp,
-      letterSpacing = 0.5.sp,
+      fontSize = TWELVE_SP,
+      lineHeight = SIXTEEN_SP,
+      letterSpacing = ZERO_POINT_FIVE_SP,
     ),
     labelSmall = DEFAULT_TEXT_STYLE.copy(
       fontWeight = FontWeight.Medium,
-      fontSize = 11.sp,
-      lineHeight = 16.sp,
-      letterSpacing = 0.5.sp,
+      fontSize = ELEVEN_SP,
+      lineHeight = SIXTEEN_SP,
+      letterSpacing = ZERO_POINT_FIVE_SP,
     ),
   )
 }
