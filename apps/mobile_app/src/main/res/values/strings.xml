@@ -4,7 +4,8 @@
   <string name="destination_about">about</string>
   <string name="home_toggle_theme_dark_content_desc">Turn on dark mode</string>
   <string name="home_toggle_theme_nondark_content_desc">Turn on non-dark mode</string>
-  <string-array name="home_temperature_unit_symbols">
+    <string name="home_input_value_error_invalid">Enter a valid temperature value.</string>
+    <string-array name="home_temperature_unit_symbols">
     <item>°C</item>
     <item>°F</item>
     <item>°K</item>

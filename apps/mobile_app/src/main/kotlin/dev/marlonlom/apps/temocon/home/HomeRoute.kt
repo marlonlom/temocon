@@ -36,7 +36,7 @@ import timber.log.Timber
 @Composable
 fun HomeRoute(
   viewModel: HomeViewModel,
-  params: HomeRouteParams
+  routeParams: HomeRouteParams
 ) {
   val inputUiState = viewModel.homeState.collectAsStateWithLifecycle()
   val outputUiState = viewModel.responseState.collectAsStateWithLifecycle()
@@ -47,9 +47,7 @@ fun HomeRoute(
     topBar = {
       HomeTopBar(
         uiState = inputUiState,
-        windowSizeClass = params.windowSizeClass,
-        navigateToAboutScreenAction = params.navigateToAboutScreenAction,
-        toggleDarkThemeAction = params.toggleDarkThemeAction
+        routeParams = routeParams
       )
     },
     content = { innerPadding: PaddingValues ->
@@ -57,9 +55,7 @@ fun HomeRoute(
         inputsUiState = inputUiState,
         outputsUiState = outputUiState,
         innerPadding = innerPadding,
-        windowSizeClass = params.windowSizeClass,
-        saveSelectedUnitIndexAction = params.saveSelectedUnitIndexAction,
-        onTemperatureValueChanged = params.onTemperatureValueChanged
+        routeParams = routeParams
       )
     })
 }
@@ -87,11 +83,9 @@ fun HomeScreenContent(
   inputsUiState: State<HomeUiState>,
   outputsUiState: State<TemperatureConvertResponse>,
   innerPadding: PaddingValues,
-  windowSizeClass: WindowSizeClass,
-  saveSelectedUnitIndexAction: (Int) -> Unit,
-  onTemperatureValueChanged: (Double) -> Unit
+  routeParams: HomeRouteParams
 ) {
-  Timber.d("[HomeScreenContent] windowSizeClass=$windowSizeClass")
+  Timber.d("[HomeScreenContent] windowSizeClass=${routeParams.windowSizeClass}")
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -99,8 +93,7 @@ fun HomeScreenContent(
   ) {
     HomeInputSlot(
       uiState = inputsUiState,
-      saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
-      onTemperatureValueChanged = onTemperatureValueChanged
+      routeParams = routeParams
     )
     HomeOutputSlot(
       uiState = outputsUiState

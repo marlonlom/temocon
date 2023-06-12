@@ -27,6 +27,7 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import dev.marlonlom.apps.temocon.R
+import dev.marlonlom.apps.temocon.home.HomeRouteParams
 import dev.marlonlom.apps.temocon.home.HomeUiState
 
 
@@ -39,11 +40,9 @@ import dev.marlonlom.apps.temocon.home.HomeUiState
 @Composable
 fun HomeTopBar(
   uiState: State<HomeUiState>,
-  windowSizeClass: WindowSizeClass,
-  navigateToAboutScreenAction: () -> Unit,
-  toggleDarkThemeAction: (Boolean) -> Unit
+  routeParams: HomeRouteParams
 ) {
-  val canShowAboutButton = canShowAboutButtonInTopBar(windowSizeClass)
+  val canShowAboutButton = canShowAboutButtonInTopBar(routeParams.windowSizeClass)
   CenterAlignedTopAppBar(
     title = {
       Text(
@@ -58,14 +57,14 @@ fun HomeTopBar(
       val systemInDarkTheme = uiState.value.isAppInDarkTheme
       IconButton(
         onClick = {
-          toggleDarkThemeAction(!systemInDarkTheme)
+          routeParams.toggleDarkThemeAction(!systemInDarkTheme)
         },
       ) {
         ToggleDarkThemeIcon(systemInDarkTheme)
       }
 
       if (canShowAboutButton) {
-        IconButton(onClick = { navigateToAboutScreenAction() }) {
+        IconButton(onClick = { routeParams.navigateToAboutScreenAction() }) {
           Icon(
             imageVector = Icons.TwoTone.Info,
             contentDescription = null,

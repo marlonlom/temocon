@@ -60,7 +60,7 @@ fun AppNavHost(
     composable(route = defaultDestination) {
       HomeRoute(
         viewModel = homeViewModel,
-        params = params
+        routeParams = params
       )
     }
 

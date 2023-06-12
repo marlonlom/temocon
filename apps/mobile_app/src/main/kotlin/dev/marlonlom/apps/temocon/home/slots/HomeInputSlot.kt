@@ -21,6 +21,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.marlonlom.apps.temocon.home.HomeRouteParams
 import dev.marlonlom.apps.temocon.home.HomeUiState
 import dev.marlonlom.apps.temocon.home.widgets.TemperatureValueTextField
 import dev.marlonlom.apps.temocon.home.widgets.ToggleTemperatureUnitButtons
@@ -36,11 +37,10 @@ import dev.marlonlom.apps.temocon.home.widgets.rememberTemperatureValueInputStat
 @Composable
 fun HomeInputSlot(
   uiState: State<HomeUiState>,
-  saveSelectedUnitIndexAction: (Int) -> Unit,
-  onTemperatureValueChanged: (Double) -> Unit
+  routeParams: HomeRouteParams
 ) {
   val inputState = rememberTemperatureValueInputState()
-  val currentOnTemperatureValueChanged by rememberUpdatedState(onTemperatureValueChanged)
+  val currentOnTemperatureValueChanged by rememberUpdatedState(routeParams.onTemperatureValueChanged)
 
   Column(
     modifier = Modifier.fillMaxWidth(),
@@ -48,7 +48,7 @@ fun HomeInputSlot(
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
     ToggleTemperatureUnitButtons(
-      uiState = uiState, saveSelectedUnitIndexAction = saveSelectedUnitIndexAction
+      uiState = uiState, saveSelectedUnitIndexAction = routeParams.saveSelectedUnitIndexAction
     )
     TemperatureValueTextField(
       inputState = inputState
