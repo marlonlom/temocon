@@ -22,8 +22,10 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.marlonlom.apps.temocon.home.widgets.HomeTopBar
 import dev.marlonlom.apps.temocon.home.slots.HomeInputSlot
+import dev.marlonlom.apps.temocon.home.slots.HomeOutputSlot
+import dev.marlonlom.apps.temocon.home.widgets.HomeTopBar
+import dev.marlonlom.utilities.temocon.core.TemperatureConvertResponse
 import timber.log.Timber
 
 /**
@@ -34,35 +36,46 @@ import timber.log.Timber
 @Composable
 fun HomeRoute(
   viewModel: HomeViewModel,
-  windowSizeClass: WindowSizeClass,
-  navigateToAboutScreenAction: () -> Unit,
-  toggleDarkThemeAction: (Boolean) -> Unit,
-  saveSelectedUnitIndexAction: (Int) -> Unit,
-  onTemperatureValueChanged: (Double) -> Unit
+  params: HomeRouteParams
 ) {
-  val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-  Timber.d("[HomeRoute] uiState: $uiState")
+  val inputUiState = viewModel.homeState.collectAsStateWithLifecycle()
+  val outputUiState = viewModel.responseState.collectAsStateWithLifecycle()
+  Timber.d("[HomeRoute] state{inputs=$inputUiState, outputs=$outputUiState}")
   Scaffold(
     containerColor = MaterialTheme.colorScheme.surface,
     contentColor = MaterialTheme.colorScheme.onSurface,
     topBar = {
       HomeTopBar(
-        uiState = uiState,
-        windowSizeClass = windowSizeClass,
-        navigateToAboutScreenAction = navigateToAboutScreenAction,
-        toggleDarkThemeAction = toggleDarkThemeAction
+        uiState = inputUiState,
+        windowSizeClass = params.windowSizeClass,
+        navigateToAboutScreenAction = params.navigateToAboutScreenAction,
+        toggleDarkThemeAction = params.toggleDarkThemeAction
       )
     },
     content = { innerPadding: PaddingValues ->
       HomeScreenContent(
-        uiState = uiState,
+        inputsUiState = inputUiState,
+        outputsUiState = outputUiState,
         innerPadding = innerPadding,
-        windowSizeClass = windowSizeClass,
-        saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
-        onTemperatureValueChanged = onTemperatureValueChanged
+        windowSizeClass = params.windowSizeClass,
+        saveSelectedUnitIndexAction = params.saveSelectedUnitIndexAction,
+        onTemperatureValueChanged = params.onTemperatureValueChanged
       )
     })
 }
+
+/**
+ * Application home route parameters data class.
+ *
+ * @author marlonlom
+ */
+data class HomeRouteParams(
+  val windowSizeClass: WindowSizeClass,
+  val navigateToAboutScreenAction: () -> Unit,
+  val toggleDarkThemeAction: (Boolean) -> Unit,
+  val saveSelectedUnitIndexAction: (Int) -> Unit,
+  val onTemperatureValueChanged: (Double) -> Unit
+)
 
 /**
  * Application home route inner content composable ui class.
@@ -71,7 +84,8 @@ fun HomeRoute(
  */
 @Composable
 fun HomeScreenContent(
-  uiState: State<HomeUiState>,
+  inputsUiState: State<HomeUiState>,
+  outputsUiState: State<TemperatureConvertResponse>,
   innerPadding: PaddingValues,
   windowSizeClass: WindowSizeClass,
   saveSelectedUnitIndexAction: (Int) -> Unit,
@@ -84,9 +98,12 @@ fun HomeScreenContent(
       .padding(innerPadding), verticalArrangement = Arrangement.spacedBy(8.dp)
   ) {
     HomeInputSlot(
-      uiState = uiState,
+      uiState = inputsUiState,
       saveSelectedUnitIndexAction = saveSelectedUnitIndexAction,
       onTemperatureValueChanged = onTemperatureValueChanged
+    )
+    HomeOutputSlot(
+      uiState = outputsUiState
     )
   }
 }

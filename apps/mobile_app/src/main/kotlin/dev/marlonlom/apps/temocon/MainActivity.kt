@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
         )
       )
 
-      val homeUiState = homeViewModel.uiState.collectAsState()
+      val homeUiState = homeViewModel.homeState.collectAsState()
       val isAppInDarkTheme = homeUiState.value.isAppInDarkTheme
 
       AppContent(

@@ -17,11 +17,14 @@ import dev.marlonlom.utilities.temocon.core.TemperatureConvertRequest
 import dev.marlonlom.utilities.temocon.core.TemperatureConvertResponse
 import dev.marlonlom.utilities.temocon.core.TemperatureConverter
 import dev.marlonlom.utilities.temocon.core.TemperatureUnit
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /**
  * Home screen ui state data class.
@@ -40,23 +43,29 @@ data class HomeUiState(
  */
 class HomeViewModel(
   private val preferencesStore: PreferencesStore,
-  private val temperatureConverter: TemperatureConverter = TemperatureConverter()
+  private val temperatureConverter: TemperatureConverter = TemperatureConverter(),
+  private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
-  private val _uiState = MutableStateFlow(initial)
+  private val _homeState = MutableStateFlow(initial)
+  private val _temperatureValueState = MutableStateFlow(Double.NaN)
   private val _responseState = MutableStateFlow(initialResponse)
 
-  val uiState = _uiState.stateIn(viewModelScope, SharingStarted.Eagerly, initial)
-  val responseState = _uiState.stateIn(viewModelScope, SharingStarted.Eagerly, initialResponse)
+  val homeState = _homeState.stateIn(viewModelScope, SharingStarted.Eagerly, initial)
+  val responseState = _responseState.stateIn(viewModelScope, SharingStarted.Eagerly, initialResponse)
 
   init {
     viewModelScope.launch {
-      preferencesStore.getPreferencesStoreState().collect { state ->
-        _uiState.update {
-          it.copy(
-            isAppInDarkTheme = state.isNightMode,
-            selectedTemperatureUnitIndex = state.defaultTemperatureUnitIndex
-          )
-        }
+      collectAndSavePreferencesStoreState()
+    }
+  }
+
+  private suspend fun collectAndSavePreferencesStoreState() {
+    preferencesStore.getPreferencesStoreState().collect { state ->
+      _homeState.update {
+        it.copy(
+          isAppInDarkTheme = state.isNightMode,
+          selectedTemperatureUnitIndex = state.defaultTemperatureUnitIndex
+        )
       }
     }
   }
@@ -67,9 +76,9 @@ class HomeViewModel(
    * @param isDarkTheme true/false if application is in dark theme.
    */
   fun toggleIsAppInDarkThemeFlag(isDarkTheme: Boolean) {
-    viewModelScope.launch {
+    viewModelScope.launch(context = coroutineDispatcher) {
       preferencesStore.toggleNightMode(isDarkTheme)
-      _uiState.update {
+      _homeState.update {
         it.copy(
           isAppInDarkTheme = isDarkTheme
         )
@@ -83,13 +92,26 @@ class HomeViewModel(
    * @param selectedIndex selected temperature unit index from the ui.
    */
   fun updateSelectedTemperatureUnitIndex(selectedIndex: Int) {
-    viewModelScope.launch {
+    viewModelScope.launch(context = coroutineDispatcher) {
       preferencesStore.saveSelectedTemperatureUnitIndex(selectedIndex)
-      _uiState.update {
+      _homeState.update {
         it.copy(
           selectedTemperatureUnitIndex = selectedIndex
         )
       }
+      updateConversionResponseState()
+    }
+  }
+
+  private fun updateConversionResponseState() {
+    val response = executeTemperatureConversion(_temperatureValueState.value)
+    _responseState.update {
+      it.copy(
+        celsiusValue = response.celsiusValue,
+        fahrenheitValue = response.fahrenheitValue,
+        kelvinValue = response.kelvinValue,
+        rankineValue = response.rankineValue
+      )
     }
   }
 
@@ -99,16 +121,22 @@ class HomeViewModel(
    * @param temperatureValue temperature value
    */
   fun convertTemperatureValue(temperatureValue: Double) {
-    viewModelScope.launch {
-      val request = TemperatureConvertRequest(
-        temperatureUnit = TemperatureUnit.values()[_uiState.value.selectedTemperatureUnitIndex],
-        valueToConvert = temperatureValue
-      )
-      val response = temperatureConverter.calculate(
-        request = request
-      )
-      _responseState.value = response
+    viewModelScope.launch(context = coroutineDispatcher) {
+      _temperatureValueState.update { temperatureValue }
+      updateConversionResponseState()
     }
+  }
+
+  private fun executeTemperatureConversion(temperatureValue: Double): TemperatureConvertResponse {
+    val request = TemperatureConvertRequest(
+      temperatureUnit = TemperatureUnit.values()[_homeState.value.selectedTemperatureUnitIndex],
+      valueToConvert = temperatureValue
+    )
+    val response = temperatureConverter.calculate(
+      request = request
+    )
+    Timber.d("[HomeViewModel.executeTemperatureConversion] conversion{request=$request,response=$response}")
+    return response
   }
 
   companion object {

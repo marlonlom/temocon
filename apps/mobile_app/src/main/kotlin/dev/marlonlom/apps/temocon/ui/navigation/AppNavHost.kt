@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import dev.marlonlom.apps.temocon.R
 import dev.marlonlom.apps.temocon.about.AboutRoute
 import dev.marlonlom.apps.temocon.home.HomeRoute
+import dev.marlonlom.apps.temocon.home.HomeRouteParams
 import dev.marlonlom.apps.temocon.home.HomeViewModel
 
 /**
@@ -40,22 +41,26 @@ fun AppNavHost(
     navController = navController, startDestination = defaultDestination
   ) {
 
+    val params = HomeRouteParams(
+      windowSizeClass = windowSizeClass,
+      navigateToAboutScreenAction = {
+        navController.navigate(aboutRoute)
+      },
+      toggleDarkThemeAction = { isDarkTheme ->
+        homeViewModel.toggleIsAppInDarkThemeFlag(isDarkTheme)
+      },
+      saveSelectedUnitIndexAction = { index: Int ->
+        homeViewModel.updateSelectedTemperatureUnitIndex(index)
+      },
+      onTemperatureValueChanged = { temperatureValue: Double ->
+        homeViewModel.convertTemperatureValue(temperatureValue)
+      }
+    )
+
     composable(route = defaultDestination) {
       HomeRoute(
         viewModel = homeViewModel,
-        windowSizeClass = windowSizeClass,
-        navigateToAboutScreenAction = {
-          navController.navigate(aboutRoute)
-        },
-        toggleDarkThemeAction = { isDarkTheme ->
-          homeViewModel.toggleIsAppInDarkThemeFlag(isDarkTheme)
-        },
-        saveSelectedUnitIndexAction = { index: Int ->
-          homeViewModel.updateSelectedTemperatureUnitIndex(index)
-        },
-        onTemperatureValueChanged = { temperatureValue: Double ->
-          homeViewModel.convertTemperatureValue(temperatureValue)
-        }
+        params = params
       )
     }
 

@@ -25,7 +25,6 @@ import dev.marlonlom.apps.temocon.home.HomeUiState
 import dev.marlonlom.apps.temocon.home.widgets.TemperatureValueTextField
 import dev.marlonlom.apps.temocon.home.widgets.ToggleTemperatureUnitButtons
 import dev.marlonlom.apps.temocon.home.widgets.rememberTemperatureValueInputState
-import timber.log.Timber
 
 /**
  * Home input slot composable ui class.
@@ -58,11 +57,8 @@ fun HomeInputSlot(
 
   LaunchedEffect(inputState) {
     snapshotFlow { inputState.textValue }.collect { text: String ->
-      if (text.toDoubleOrNull() == null) {
-        Timber.e("[HomeInputSlot/LaunchedEffect] text=$text; text.toDoubleOrNull=${text.toDoubleOrNull()}")
-        return@collect
-      }
-      currentOnTemperatureValueChanged(text.toDouble())
+      val convertingValue = if (text.toDoubleOrNull() == null) Double.NaN else text.toDouble()
+      currentOnTemperatureValueChanged(convertingValue)
     }
   }
 }
